@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectFinance.Models
+namespace ProjectFinance2.Models
 {
     public class Account
     {
