@@ -17,6 +17,7 @@ namespace ProjectFinance2
             services.AddControllersWithViews();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IFinancialTransactionRepository, FinancialTransactionRepository>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)

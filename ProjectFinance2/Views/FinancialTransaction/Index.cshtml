@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ProjectFinance2.Models.FinancialTransaction>
+
+<p>
+    <a asp-action="IndexCreateFinancialTransaction">Create New Transaction</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nature)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DestinationAccount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nature)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

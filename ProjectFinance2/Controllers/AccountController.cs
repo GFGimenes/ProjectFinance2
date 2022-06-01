@@ -17,42 +17,45 @@ namespace ProjectFinance2.Controllers
 
         public ActionResult IndexCreateAccount()
         {
-            return View("CreateAccount");
+            return View("Create");
         }
 
         [Route("/CreateAccount")]
         public ActionResult Create(Account account)
         {
+            if (ModelState.IsValid)
+            {
             try
             {
                 account.CurrentBalance = float.Parse(account.CurrentBalance.ToString());
-                bool create = _accountRepository.AddAccount(account);
+                _accountRepository.AddAccount(account);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return IndexCreateAccount();
+            }
+            Index();
+            return View("Index");
         }
 
         public ActionResult Delete(int id)
         {
             try
             {
-                Object htmlAttributes;
-                
-                bool delete = _accountRepository.DeleteAccount(id);
+                _accountRepository.DeleteAccount(id);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return IndexCreateAccount();
+            Index();
+            return View("Index");
         }
 
-        public ActionResult AllAccounts()
+        public ActionResult Index()
         {
             IEnumerable<Account> accounts = new List<Account>();
 

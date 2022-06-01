@@ -1,0 +1,55 @@
+﻿@model ProjectFinance2.Models.FinancialTransaction
+
+    @using (Html.BeginForm("", "/CreateFinancialTransaction", FormMethod.Post))
+    {
+
+
+<div>
+    <div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><strong>Create an Financial Transaction to withdraw or deposit funds</strong></h3>
+            </div>
+            <div class="modal-body">
+    <div class="container" >
+        <div class="row" style="flex-direction: column; align-items:center">
+            <div class="col-md-4">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="col-md-12" style="margin-top:15px;">
+                         <label asp-for=DestinationAccount style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for="DestinationAccount" />
+                        <span class="alert-danger" asp-validation-for="DestinationAccount"></span>
+                        </div>
+                        <div class="col-md-12" style="margin-top:15px;">
+                         <label asp-for=Value style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for=Value />
+                        <span class="alert-danger" asp-validation-for=Value></span>
+                        </div>
+                        <div class="col-md-12" style="margin-top:15px;">
+                         <label asp-for=Description style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for=Description />
+                        <span class="alert-danger" asp-validation-for=Description></span>
+                        </div>
+                        <div class="col-md-12" style="margin-top:15px;">
+                         <label asp-for=Nature style="font-weight:bold;"></label>
+                        <input type='text' class='form-control' asp-for=Nature />
+                        <span class="alert-danger" asp-validation-for=Nature></span>
+                        </div>
+
+                        <div class="text-center col-md-12" style="margin-top:35px;">
+                            <button class="btn btn-primary btn-sx" type="submit" value="Submit"><i class="glyphicon glyphicon-plus"></i> Create a Transaction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+     </div>
+
+
+    }

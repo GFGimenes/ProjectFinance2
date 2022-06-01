@@ -4,8 +4,10 @@ namespace ProjectFinance2.Interfaces
 {
     public interface IAccountRepository
     {
-        bool AddAccount(Account account);
-        bool DeleteAccount(int accountId);
+        void AddAccount(Account account);
+        void DeleteAccount(int accountId);
         List<Account> GetAccounts();
+
+        Account GetAccountById(int accountId);
     }
 }

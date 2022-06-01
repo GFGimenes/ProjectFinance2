@@ -10,11 +10,11 @@ using System.Linq;
 
 namespace ProjectFinance2.Application.Repositories
 {
-    public class AccountRepository : IAccountRepository
+    public class FinancialTransactionRepository : IFinancialTransactionRepository
     {
         IConfiguration _configuration;
 
-        public AccountRepository(IConfiguration configuration)
+        public FinancialTransactionRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -25,7 +25,7 @@ namespace ProjectFinance2.Application.Repositories
             return connection;
         }
         
-        public void AddAccount(Account account)
+        public void AddFinancialTransaction(FinancialTransaction financialTransaction)
         {
             var connectionString = this.GetConnection();
             using (var con = new SqlConnection(connectionString))
@@ -33,8 +33,8 @@ namespace ProjectFinance2.Application.Repositories
                 try
                 {
                     con.Open();
-                    var query = "INSERT INTO Accounts(Name, AccountNumber, CurrentBalance) VALUES( @Name, @AccountNumber, @CurrentBalance);";
-                    con.Execute(query, account);
+                    var query = "INSERT INTO FinancialTransaction(DestinationAccount, Description, Value, Nature) VALUES( @DestinationAccount, @Description, @Value, @Nature);";
+                    con.Execute(query, financialTransaction);
                 }
                 catch (Exception ex)
                 {
@@ -47,7 +47,7 @@ namespace ProjectFinance2.Application.Repositories
             }
         }
 
-        public void DeleteAccount(int accountId)
+        public void AccountMovement(int accountId, float value)
         {
             var connectionString = this.GetConnection();
             using (var con = new SqlConnection(connectionString))
@@ -55,8 +55,10 @@ namespace ProjectFinance2.Application.Repositories
                 try
                 {
                     con.Open();
-                    var query = "DELETE FROM Accounts WHERE AccountId = @AccountId;";
-                    con.Execute( query, new { accountId });
+                    var query = $@"UPDATE Accounts 
+                                    SET CurrentBalance = @value
+                                    WHERE AccountId = @accountId";
+                    con.Execute( query, new { accountId, value });
                 }
                 catch (Exception ex)
                 {
@@ -69,7 +71,7 @@ namespace ProjectFinance2.Application.Repositories
             }
         }
 
-        public List<Account> GetAccounts()
+        public List<FinancialTransaction> GetFinancialTransactions()
         {
             var connectionString = this.GetConnection();
             using (var con = new SqlConnection(connectionString))
@@ -77,31 +79,8 @@ namespace ProjectFinance2.Application.Repositories
                 try
                 {
                     con.Open();
-                    var query = "SELECT * FROM Accounts";
-                    return con.Query<Account>(query).ToList();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                    con.Close();
-                }
-            }
-
-        }
-
-        public Account GetAccountById(int accountId)
-        {
-            var connectionString = this.GetConnection();
-            using (var con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    var query = "SELECT * FROM Accounts WHERE AccountId = @accountid";
-                    return con.Query<Account>(query, new { accountId}).FirstOrDefault() ;
+                    var query = "SELECT * FROM FinancialTransaction";
+                    return con.Query<FinancialTransaction>(query).ToList();
                 }
                 catch (Exception ex)
                 {
