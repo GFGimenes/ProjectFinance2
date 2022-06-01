@@ -1,1 +1,25 @@
 
+This is a small project done quickly (2 days) to demonstrate a few development features.
+If you cannot access the database, i will leave the table creation scripts further down, or if you know how to configure the IP to connect to the database, the server has a permission for the following IP: 201.43.124.212.
+The idea is to update the project when i have more time
+
+
+
+Scripts:
+
+
+CREATE TABLE [dbo].[Accounts]
+(
+    [AccountId] INT IDENTITY(1,1),
+    [Name] NVARCHAR(50) NOT NULL,
+    [AccountNumber] INT NOT NULL,
+    [CurrentBalance] FLOAT NOT NULL
+);
+
+CREATE TABLE [dbo].[FinancialTransaction](
+    [TransactionId] INT IDENTITY(1,1),
+    [DestinationAccount] int not null,
+    [Description] NVARCHAR(200) null,
+    [Value] FLOAT NOT NULL,
+    [Nature] int NOT NULL
+);
